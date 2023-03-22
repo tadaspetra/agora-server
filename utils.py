@@ -62,7 +62,7 @@ def start_call():
         "cname": CHANNEL,
         "uid": str(UID),
         "clientRequest": {
-            "token": TEMP_TOKEN,
+            # "token": TEMP_TOKEN,
 
             "recordingConfig": {
                 "maxIdleTime": 3,

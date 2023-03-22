@@ -21,5 +21,5 @@ AWS_BUCKET_NAME = "<--AWS Bucket Name-->"
 ### Starting Server
 
 ```
-flask run
+python -m flask run 
 ```
