@@ -11,7 +11,7 @@ CUSTOMER_SECRET = "<--Agora Customer Key-->"
 
 TEMP_TOKEN = "<--Agora Temporary Token-->"
 APP_ID = "<--Agora App ID-->"
-CHANNEL = "<--Agora Channel name-->"
+CHANNEL = "<--Agora Channel Name-->"
 
 AWS_SECRET_KEY = "<--AWS Secret Key-->"
 AWS_ACCESS_KEY = "<--AWS Access Key-->"
