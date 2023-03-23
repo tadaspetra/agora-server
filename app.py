@@ -10,7 +10,7 @@ CORS(app)
 
 @app.route('/')
 def endpoints():
-    app_routes = ['/start-call', '/end-call/<sid>/<resource_id>']
+    app_routes = ['/start-call', '/stop-call/<sid>/<resource_id>']
     return json.dumps(app_routes)
 
 

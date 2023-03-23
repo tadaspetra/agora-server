@@ -56,7 +56,6 @@ def generate_resource():
 
 def start_call():
     resource_id = generate_resource()
-    print('resource_id')
     url = f"https://api.agora.io/v1/apps/{APP_ID}/cloud_recording/resourceid/{resource_id}/mode/mix/start"
     payload = {
         "cname": CHANNEL,
@@ -71,7 +70,7 @@ def start_call():
             "storageConfig": {
                 "secretKey": AWS_SECRET_KEY,
                 "vendor": 1,  # 1 is for AWS
-                "region": 3,
+                "region": 1,
                 "bucket": AWS_BUCKET_NAME,
                 "accessKey": AWS_ACCESS_KEY,
                 "fileNamePrefix": [
@@ -102,14 +101,13 @@ def start_call():
 
 
 def stop_call(resource_id, sid):
-    print('resource_id:', resource_id)
     url = f"https://api.agora.io/v1/apps/{APP_ID}/cloud_recording/resourceid/{resource_id}/sid/{sid}/mode/mix/stop"
 
     headers = {}
 
     headers['Authorization'] = 'basic ' + credential
 
-    headers['Content-Type'] = 'application/json'
+    headers['Content-Type'] = 'application/json;charset=utf-8'
 
     payload = {
         "cname": "main",
