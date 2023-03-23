@@ -2,6 +2,3 @@ Flask
 Gunicorn
 flask-cors
 requests
-json
-random
-os
