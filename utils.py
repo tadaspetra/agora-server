@@ -42,6 +42,7 @@ def generate_resource():
     headers['Authorization'] = 'basic ' + credential
 
     headers['Content-Type'] = 'application/json'
+    headers['Access-Control-Allow-Origin'] = '*'
 
     url = f"https://api.agora.io/v1/apps/{APP_ID}/cloud_recording/acquire"
     res = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -92,6 +93,7 @@ def start_call():
     headers['Authorization'] = 'basic ' + credential
 
     headers['Content-Type'] = 'application/json'
+    headers['Access-Control-Allow-Origin'] = '*'
 
     res = requests.post(url, headers=headers, data=json.dumps(payload))
     data = res.json()
@@ -108,6 +110,7 @@ def stop_call(resource_id, sid):
     headers['Authorization'] = 'basic ' + credential
 
     headers['Content-Type'] = 'application/json;charset=utf-8'
+    headers['Access-Control-Allow-Origin'] = '*'
 
     payload = {
         "cname": "main",
