@@ -8,20 +8,20 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route('/')
+@app.route('/',)
 def endpoints():
     app_routes = ['/start-call', '/stop-call/<sid>/<resource_id>']
     return json.dumps(app_routes)
 
 
-@app.route('/start-call')
+@app.route('/start-call', methods=['GET', 'POST'])
 def start_recording():
     resource_id, sid = start_call()
     context = {'sid': sid, "resource_id": resource_id}
     return json.dumps(context)
 
 
-@app.route('/stop-call/<path:sid>/<path:resource_id>')
+@app.route('/stop-call/<path:sid>/<path:resource_id>', methods=['GET', 'POST'])
 def stop_recording(sid, resource_id):
     data = stop_call(resource_id, sid)
     context = {}
