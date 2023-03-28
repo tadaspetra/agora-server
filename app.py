@@ -30,7 +30,7 @@ def stop_recording(sid, resource_id):
 
 
 @app.route('/start-transcription', methods=['GET', 'POST'])
-def start_recording():
+def start_transcription():
     data = start_transcription()
     context = data
     return json.dumps(context)
