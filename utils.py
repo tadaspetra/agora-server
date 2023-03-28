@@ -131,3 +131,94 @@ def stop_call(resource_id, sid):
                       'server_response': server_response, 'mp4_link': mp4_link, 'm3u8_link': m3u8_link}
 
     return formatted_data
+
+
+def rtt_generate_resource():
+
+    payload = {
+        "instanceId": CHANNEL,
+    }
+
+    headers = {}
+
+    headers['Authorization'] = 'basic ' + credential
+
+    headers['Content-Type'] = 'application/json'
+    headers['Access-Control-Allow-Origin'] = '*'
+
+    url = f"https://api.agora.io/v1/projects/{APP_ID}/rtsc/speech-to-text/builderTokens"
+    res = requests.post(url, headers=headers, data=json.dumps(payload))
+
+    data = res.json()
+    tokenName = data["tokenName"]
+
+    return tokenName
+
+
+def start_transcription():
+    tokenName = rtt_generate_resource()
+    url = f"https://api.agora.io/v1/projects/{APP_ID}/rtsc/speech-to-text/tasks?builderToken={tokenName}"
+    payload = {
+        "audio": {
+            "subscribeSource": "AGORARTC",
+            "agoraRtcConfig": {
+                "channelName": "main",
+                "uid": "101",
+                # "token": "{{channelToken}}",
+                "channelType": "LIVE_TYPE",
+                "subscribeConfig": {
+                    "subscribeMode": "CHANNEL_MODE"
+                },
+                "maxIdleTime": 60
+            }
+        },
+        "config": {
+            "features": [
+                "RECOGNIZE"
+            ],
+            "recognizeConfig": {
+                "language": "ENG",
+                "model": "Model",
+                "output": {
+                    "destinations": [
+                        "AgoraRTCDataStream",
+                        "Storage"
+                    ],
+                    "agoraRTCDataStream": {
+                        "channelName": "main",
+                        "uid": "101",
+                        # "token": "{{channelToken}}"
+                    },
+                    "cloudStorage": [
+                        {
+                            "format": "HLS",
+                            "storageConfig": {
+                                "accessKey": AWS_ACCESS_KEY,
+                                "secretKey": AWS_SECRET_KEY,
+                                "bucket": AWS_BUCKET_NAME,
+                                "vendor": 0,
+                                "region": 0,
+                                "fileNamePrefix": [
+                                    "agora",
+                                    "rtt"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+
+    headers = {}
+
+    headers['Authorization'] = 'basic ' + credential
+
+    headers['Content-Type'] = 'application/json'
+    headers['Access-Control-Allow-Origin'] = '*'
+
+    res = requests.post(url, headers=headers, data=json.dumps(payload))
+    data = res.json()
+    print(data)
+
+    return data
