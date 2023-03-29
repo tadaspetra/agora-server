@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import json
 from flask_cors import CORS
 
-from utils import start_call, stop_call, start_transcription
+from utils import start_call, stop_call, start_transcription, stop_transcription
 
 app = Flask(__name__)
 CORS(app)
@@ -11,7 +11,7 @@ CORS(app)
 @app.route('/',)
 def endpoints():
     app_routes = ['/start-call',
-                  '/stop-call/<sid>/<resource_id>', '/start-transcription']
+                  '/stop-call/<sid>/<resource_id>', '/start-transcribe', '/stop-transcribe/<task_id>/<builder_token>']
     return json.dumps(app_routes)
 
 
@@ -29,11 +29,18 @@ def stop_recording(sid, resource_id):
     return json.dumps(data)
 
 
-@app.route('/start-transcription', methods=['GET', 'POST'])
-def start_transcription():
-    data = start_transcription()
-    context = data
+@app.route('/start-transcribe', methods=['GET', 'POST'])
+def start_transcribe():
+    data, builderToken = start_transcription()
+    context = {'data': data, 'builderToken': builderToken}
     return json.dumps(context)
+
+
+@app.route('/stop-transcribe/<path:task_id>/<path:builder_token>/', methods=['GET', 'POST', 'DELETE'])
+def stop_transcribe(task_id, builder_token):
+    data = stop_transcription(task_id, builder_token)
+    context = {}
+    return json.dumps(data)
 
 
 if __name__ == '__main__':

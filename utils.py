@@ -196,10 +196,9 @@ def start_transcription():
                                 "accessKey": AWS_ACCESS_KEY,
                                 "secretKey": AWS_SECRET_KEY,
                                 "bucket": AWS_BUCKET_NAME,
-                                "vendor": 0,
-                                "region": 0,
+                                "vendor": 1,
+                                "region": 1,
                                 "fileNamePrefix": [
-                                    "agora",
                                     "rtt"
                                 ]
                             }
@@ -215,10 +214,27 @@ def start_transcription():
     headers['Authorization'] = 'basic ' + credential
 
     headers['Content-Type'] = 'application/json'
-    headers['Access-Control-Allow-Origin'] = '*'
 
     res = requests.post(url, headers=headers, data=json.dumps(payload))
     data = res.json()
     print(data)
 
+    return data, tokenName
+
+
+def stop_transcription(task_id, builder_token):
+    url = f"https://api.agora.io/v1/projects/{APP_ID}/rtsc/speech-to-text/tasks/{task_id}?builderToken={builder_token}"
+
+    headers = {}
+
+    headers['Authorization'] = 'basic ' + credential
+
+    headers['Content-Type'] = 'application/json'
+
+    payload = {}
+
+    res = requests.delete(url, headers=headers, data=payload)
+    data = res.json()
+    print(data)
+    print(res.status_code)
     return data
