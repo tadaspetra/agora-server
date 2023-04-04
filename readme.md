@@ -42,10 +42,6 @@ python -m flask run
 ```
 /stop-recording/<--Channel Name-->/<--SID-->/<--Resource ID-->
 ```
-#### Successful Response
-```
-{}
-```
 
 ### Start Real Time Transcription
 #### Endpoint
@@ -61,8 +57,4 @@ python -m flask run
 #### Endpoint
 ```
 /start-transcribing/<--Channel Name-->/<--Task ID-->/<--Builder Token-->
-```
-#### Successful Response
-```
-{}
 ```
