@@ -57,7 +57,8 @@ python -m flask run
 {taskId: <--Task ID Value-->, builderToken: <--Builder Token Value-->}
 ```
 
-### Stop Real Time Transcription#### Endpoint
+### Stop Real Time Transcription
+#### Endpoint
 ```
 /start-transcribing/<--Channel Name-->/<--Task ID-->/<--Builder Token-->
 ```
