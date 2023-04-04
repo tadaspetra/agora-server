@@ -176,7 +176,7 @@ def start_transcription(channel):
                 "RECOGNIZE"
             ],
             "recognizeConfig": {
-                "language": "ENG",
+                "language": "en-US,es-ES",
                 "model": "Model",
                 "output": {
                     "destinations": [
