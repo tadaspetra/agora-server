@@ -2,7 +2,6 @@ services:
   - type: web
     name: Agora Server
     env: python
-    repo: https://github.com/tadaspetra/agora-server
     rootDir: .
     plan: free
     envVars:
