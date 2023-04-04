@@ -1,9 +1,10 @@
 services:
   - type: web
     name: Agora Server
-    env: docker
+    env: python
     repo: https://github.com/tadaspetra/agora-server.git
     rootDir: .
+    startCommand: python3 -m flask run
     plan: free
     envVars:
       - key: APP_ID
