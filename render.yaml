@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: Agora Server
+    env: python
+    repo: https://github.com/tadaspetra/agora-server.git
+    rootDir: .
+    plan: free
+    envVars:
+      - key: APP_ID
+        sync: false
+      - key: AWS_ACCESS_KEY
+        sync: false
+      - key: AWS_BUCKET_NAME
+        sync: false
+      - key: AWS_SECRET_KEY
+        sync: false
+      - key: CUSTOMER_KEY
+        sync: false
+      - key: CUSTOMER_SECRET
+        sync: false

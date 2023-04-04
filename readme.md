@@ -1,5 +1,8 @@
 # Agora Server for Cloud Recording and Real Time Transcription
 
+## One-Click Deploy
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
 ## Getting Started
 
 ```
