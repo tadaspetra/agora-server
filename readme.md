@@ -18,9 +18,9 @@ CUSTOMER_SECRET = "<--Agora Customer Key-->"
 TEMP_TOKEN = "<--Agora Temporary Token-->"
 APP_ID = "<--Agora App ID-->"
 
-AWS_SECRET_KEY = "<--AWS Secret Key-->"
-AWS_ACCESS_KEY = "<--AWS Access Key-->"
-AWS_BUCKET_NAME = "<--AWS Bucket Name-->"
+SECRET_KEY = "<--Cloud Service Secret Key-->"
+ACCESS_KEY = "<--Cloud Service Access Key-->"
+BUCKET_NAME = "<--Cloud Service Bucket Name-->"
 ```
 
 ## Starting Server

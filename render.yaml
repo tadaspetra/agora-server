@@ -4,16 +4,17 @@ services:
     env: python
     repo: https://github.com/tadaspetra/agora-server.git
     rootDir: .
+    buildCommand: pip install flask
     startCommand: python3 -m flask run
     plan: free
     envVars:
       - key: APP_ID
         sync: false
-      - key: AWS_ACCESS_KEY
+      - key: ACCESS_KEY
         sync: false
-      - key: AWS_BUCKET_NAME
+      - key: BUCKET_NAME
         sync: false
-      - key: AWS_SECRET_KEY
+      - key: SECRET_KEY
         sync: false
       - key: CUSTOMER_KEY
         sync: false

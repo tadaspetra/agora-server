@@ -11,9 +11,9 @@ TEMP_TOKEN = os.getenv('TEMP_TOKEN')
 APP_ID = os.getenv('APP_ID')
 UID = random.randint(1, 232)
 
-AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
-AWS_ACCESS_KEY = os.getenv('AWS_ACCESS_KEY')
-AWS_BUCKET_NAME = os.getenv('AWS_BUCKET_NAME')
+SECRET_KEY = os.getenv('SECRET_KEY')
+ACCESS_KEY = os.getenv('ACCESS_KEY')
+BUCKET_NAME = os.getenv('BUCKET_NAME')
 
 
 def generate_credential():
@@ -68,11 +68,11 @@ def start_cloud_recording(channel):
             },
 
             "storageConfig": {
-                "secretKey": AWS_SECRET_KEY,
+                "secretKey": SECRET_KEY,
                 "vendor": 1,  # 1 is for AWS
                 "region": 1,
-                "bucket": AWS_BUCKET_NAME,
-                "accessKey": AWS_ACCESS_KEY,
+                "bucket": BUCKET_NAME,
+                "accessKey": ACCESS_KEY,
                 "fileNamePrefix": [
                     "agora",
                 ]
@@ -192,9 +192,9 @@ def start_transcription(channel):
                         {
                             "format": "HLS",
                             "storageConfig": {
-                                "accessKey": AWS_ACCESS_KEY,
-                                "secretKey": AWS_SECRET_KEY,
-                                "bucket": AWS_BUCKET_NAME,
+                                "accessKey": ACCESS_KEY,
+                                "secretKey": SECRET_KEY,
+                                "bucket": BUCKET_NAME,
                                 "vendor": 1,
                                 "region": 1,
                                 "fileNamePrefix": [
