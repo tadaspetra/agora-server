@@ -9,7 +9,6 @@ CUSTOMER_SECRET = os.getenv('CUSTOMER_SECRET')
 
 TEMP_TOKEN = os.getenv('TEMP_TOKEN')
 APP_ID = os.getenv('APP_ID')
-CHANNEL = os.getenv('CHANNEL')
 UID = random.randint(1, 232)
 
 AWS_SECRET_KEY = os.getenv('AWS_SECRET_KEY')
@@ -29,10 +28,10 @@ def generate_credential():
 credential = generate_credential()
 
 
-def generate_resource():
+def generate_resource(channel):
 
     payload = {
-        "cname": CHANNEL,
+        "cname": channel,
         "uid": str(UID),
         "clientRequest": {}
     }
@@ -55,11 +54,11 @@ def generate_resource():
 # generate_resource()
 
 
-def start_call():
-    resource_id = generate_resource()
+def start_cloud_recording(channel):
+    resource_id = generate_resource(channel)
     url = f"https://api.agora.io/v1/apps/{APP_ID}/cloud_recording/resourceid/{resource_id}/mode/mix/start"
     payload = {
-        "cname": CHANNEL,
+        "cname": channel,
         "uid": str(UID),
         "clientRequest": {
             # "token": TEMP_TOKEN,
@@ -102,7 +101,7 @@ def start_call():
     return resource_id, sid
 
 
-def stop_call(resource_id, sid):
+def stop_cloud_recording(channel, resource_id, sid):
     url = f"https://api.agora.io/v1/apps/{APP_ID}/cloud_recording/resourceid/{resource_id}/sid/{sid}/mode/mix/stop"
 
     headers = {}
@@ -113,7 +112,7 @@ def stop_call(resource_id, sid):
     headers['Access-Control-Allow-Origin'] = '*'
 
     payload = {
-        "cname": "main",
+        "cname": channel,
         "uid": str(UID),
         "clientRequest": {
         }
@@ -133,10 +132,10 @@ def stop_call(resource_id, sid):
     return formatted_data
 
 
-def rtt_generate_resource():
+def rtt_generate_resource(channel):
 
     payload = {
-        "instanceId": CHANNEL,
+        "instanceId": channel,
     }
 
     headers = {}
@@ -155,14 +154,14 @@ def rtt_generate_resource():
     return tokenName
 
 
-def start_transcription():
-    tokenName = rtt_generate_resource()
+def start_transcription(channel):
+    tokenName = rtt_generate_resource(channel)
     url = f"https://api.agora.io/v1/projects/{APP_ID}/rtsc/speech-to-text/tasks?builderToken={tokenName}"
     payload = {
         "audio": {
             "subscribeSource": "AGORARTC",
             "agoraRtcConfig": {
-                "channelName": "main",
+                "channelName": channel,
                 "uid": "101",
                 # "token": "{{channelToken}}",
                 "channelType": "LIVE_TYPE",
@@ -185,7 +184,7 @@ def start_transcription():
                         "Storage"
                     ],
                     "agoraRTCDataStream": {
-                        "channelName": "main",
+                        "channelName": channel,
                         "uid": "101",
                         # "token": "{{channelToken}}"
                     },
@@ -217,9 +216,9 @@ def start_transcription():
 
     res = requests.post(url, headers=headers, data=json.dumps(payload))
     data = res.json()
-    print(data)
+    taskID = data["taskId"]
 
-    return data, tokenName
+    return taskID, tokenName
 
 
 def stop_transcription(task_id, builder_token):
@@ -235,6 +234,4 @@ def stop_transcription(task_id, builder_token):
 
     res = requests.delete(url, headers=headers, data=payload)
     data = res.json()
-    print(data)
-    print(res.status_code)
     return data
