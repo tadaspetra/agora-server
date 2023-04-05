@@ -4,8 +4,8 @@ services:
     env: python
     repo: https://github.com/tadaspetra/agora-server.git
     rootDir: .
-    buildCommand: pip install flask flask-cors requests
-    startCommand: app
+    buildCommand: pip install flask flask-cors requests gunicorn
+    startCommand: gunicorn app:app
     plan: free
     envVars:
       - key: APP_ID
