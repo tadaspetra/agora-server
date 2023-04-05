@@ -5,7 +5,7 @@ services:
     repo: https://github.com/tadaspetra/agora-server.git
     rootDir: .
     buildCommand: pip install flask flask-cors requests
-    startCommand: python3 -m flask run
+    startCommand: app
     plan: free
     envVars:
       - key: APP_ID
