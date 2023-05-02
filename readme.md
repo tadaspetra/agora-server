@@ -60,5 +60,5 @@ python -m flask run
 ### Stop Real Time Transcription
 #### Endpoint
 ```
-/start-transcribing/<--Channel Name-->/<--Task ID-->/<--Builder Token-->
+/stop-transcribing/<--Channel Name-->/<--Task ID-->/<--Builder Token-->
 ```
