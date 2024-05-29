@@ -162,7 +162,7 @@ def start_transcription(channel):
             "subscribeSource": "AGORARTC",
             "agoraRtcConfig": {
                 "channelName": channel,
-                "uid": "101",
+                "uid": "100",
                 # "token": "{{channelToken}}",
                 "channelType": "LIVE_TYPE",
                 "subscribeConfig": {
